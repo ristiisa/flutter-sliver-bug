@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
-
-const MAPBOX_ACCESS_TOKEN = "MAPBOX ACCESS TOKEN HERE";
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
 
@@ -60,8 +58,9 @@ class PlatformViewWidget extends StatelessWidget {
           creationParams: creationParams,
           creationParamsCodec: const StandardMessageCodec(),
         )),
-        Expanded(child: MapWidget(
-          resourceOptions: ResourceOptions(accessToken: MAPBOX_ACCESS_TOKEN),
+        Expanded(child: GoogleMap(
+          initialCameraPosition: CameraPosition(target: LatLng(37, -122)),
+          onMapCreated: (c) => c.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(56, 22)))),
         ))
       ]);
     }
